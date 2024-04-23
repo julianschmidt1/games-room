@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './app/styles/colors.scss';
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    background-color: $background-1;
+}
+
+* {
+    font-size: 100%;
+    font-family: "Pixelify Sans";
+}
