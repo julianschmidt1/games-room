@@ -1,0 +1,53 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/sizes.scss';
+
+
+.login-container {
+    @include display-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+
+    .login {
+        @include display-flex();
+        @include flex-direction(column);
+        @include justify-content(center);
+
+        min-width: 450px;
+        background-color: $light-background-1;
+        border-radius: calc($space-5 - 2px);
+        padding: $space-4;
+    }
+
+    p {
+        padding: calc($space-5 / 2) 0;
+    }
+
+    img {
+        height: 350px;
+        width: 350px;
+        margin-right: 50px;
+        animation: floatAnimation 3s ease-in-out infinite alternate;
+    }
+
+    input {
+        margin-bottom: $space-5;
+    }
+
+    label {
+        margin-bottom: $space-5;
+    }
+
+    @keyframes floatAnimation {
+        0% {
+            transform: translateX(0) rotate(0);
+        }
+
+        100% {
+            transform: translateX(10px) rotate(5deg);
+        }
+    }
+}
