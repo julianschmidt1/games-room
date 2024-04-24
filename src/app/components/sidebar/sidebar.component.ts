@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SidebarModule } from 'primeng/sidebar';
 import { User } from '../../../models/user.model';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'sidebar',
@@ -15,10 +15,11 @@ import { RouterModule } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent implements OnInit {
-  public isVisible: boolean = true;
+export class SidebarComponent {
+  public isVisible: boolean = false;
   public loggedUser!: User;
   public navigationOptions: SidebarNavigationItem[];
+  private _router = inject(Router);
 
   constructor() {
     const user = localStorage.getItem('user');
@@ -33,10 +34,10 @@ export class SidebarComponent implements OnInit {
     ]
   }
 
-  ngOnInit(): void {
+  public handleLogout(): void {
+    localStorage.clear();
+    this._router.navigate([''], { replaceUrl: true });
   }
-
-
 }
 
 interface SidebarNavigationItem {

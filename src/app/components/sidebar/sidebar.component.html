@@ -9,18 +9,27 @@
                 </h3>
             </div>
 
-            <div class="sidebar-navigation-options">
+            <div class="sidebar-actions">
+                <div class="sidebar-navigation-options">
 
-                <a class="option" *ngFor="let item of navigationOptions" routerLinkActive="active" [routerLink]="item.navigateTo">
-                    {{item.title}}
-                </a>
+                    <a class="option navigation" *ngFor="let item of navigationOptions" routerLinkActive="active"
+                        [routerLink]="item.navigateTo">
+                        {{item.title}}
+                    </a>
 
+                </div>
+
+                <div (click)="handleLogout()" class="option logout">
+                    Cerrar sesión
+                </div>
             </div>
 
         </div>
     </ng-template>
 </p-sidebar>
-<div>
-
+<div class="head-toggle">
+    <div class="logo-row">
+        <span (click)="isVisible = true" class="pi pi-bars toggle-icon"></span>
+        <span class="title">GamesRoom</span>
+    </div>
 </div>
-<button (click)="isVisible = true" icon="pi pi-arrow-right">Sidebar</button>
