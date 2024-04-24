@@ -1,18 +1,26 @@
 <div class="login-container">
+    <p-toast />
+    <div class="test">
 
+        <div class="logo-container">
+            <img src="../../../assets/icon-full.svg" alt="GamesRoom Icon">
+        </div>
 
-    <img src="../../../assets/icon-full.svg" alt="">
-    <div class="login ">
+        <div class="login">
+            <h1 class="login-title">Games Room</h1>
 
-        <h3>Inicia sesión</h3>
+            <label for="userName">Correo electrónico</label>
+            <input type="text" name="userName" pInputText [(ngModel)]="userName" />
 
-        <label for="userName">Correo electrónico</label>
-        <input type="text" name="userName" formGroup pInputText [(ngModel)]="userName" />
+            <label for="userName">Contraseña</label>
+            <input type="password" name="password" pInputText [(ngModel)]="password" />
 
-        <label for="userName">Contraseña</label>
-        <input type="password" name="password" pInputText [(ngModel)]="password" />
+            <div class="action-buttons">
+                <button class="custom-button admin-effect" (click)="setAdminCredentials()">¡SOY ADMIN!</button>
+                <button class="custom-button" (click)="handleLogin()">Ingresar</button>
+            </div>
+        </div>
 
-        <button>Ingresar</button>
     </div>
 
 </div>

@@ -97,3 +97,9 @@
     -webkit-align-items: $value;
     align-items: $value;
 }
+
+@mixin center-content(){
+    @include display-flex();
+    @include justify-content(center);
+    @include align-items(center);
+}
