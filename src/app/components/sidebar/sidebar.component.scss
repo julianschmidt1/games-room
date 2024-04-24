@@ -1,0 +1,53 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.custom-sidebar {
+    @include flex-direction(column);
+
+    .sidebar-content {
+        height: 100%;
+        padding: 36px 24px;
+        background-color: $background-2;
+
+        .sidebar-header {
+            @include center-content();
+            @include flex-direction(column);
+
+            img {
+                height: 90px;
+                width: 90px;
+            }
+
+            .user-name {
+                color: $text-color-1;
+            }
+        }
+
+        .sidebar-navigation-options {
+            @include display-flex();
+            @include flex-direction(column);
+
+            .active {
+                background-color: $primary-color-1;
+            }
+            
+            .option {
+                transition: 0.2s ease-in;
+                padding: 12px;
+                margin: 4px;
+                border-radius: 8px;
+                text-decoration: none;
+                color: $text-color-1;
+                cursor: pointer;
+                
+                &:hover {
+                    color: $base-black;
+                    background-color: $primary-color-1;
+                }
+            }
+
+        }
+
+
+    }
+}

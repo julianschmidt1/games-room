@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-container page-content">
     <p-toast />
     <div class="test">
 
@@ -10,10 +10,10 @@
             <h1 class="login-title">Games Room</h1>
 
             <label for="userName">Correo electrónico</label>
-            <input type="text" name="userName" pInputText [(ngModel)]="userName" />
+            <input type="text" name="userName" pInputText [(ngModel)]="user.email" />
 
             <label for="userName">Contraseña</label>
-            <input type="password" name="password" pInputText [(ngModel)]="password" />
+            <input type="password" name="password" pInputText [(ngModel)]="user.password" />
 
             <div class="action-buttons">
                 <button class="custom-button admin-effect" (click)="setAdminCredentials()">¡SOY ADMIN!</button>

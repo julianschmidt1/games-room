@@ -1,0 +1,26 @@
+<p-sidebar class="custom-sidebar" [(visible)]="isVisible">
+    <ng-template pTemplate="headless">
+        <div class="sidebar-content">
+
+            <div class="sidebar-header">
+                <img src="../../../assets/icon-profile.svg" alt="Profile icon">
+                <h3 class="user-name">
+                    {{loggedUser.userName.toUpperCase()}}
+                </h3>
+            </div>
+
+            <div class="sidebar-navigation-options">
+
+                <a class="option" *ngFor="let item of navigationOptions" routerLinkActive="active" [routerLink]="item.navigateTo">
+                    {{item.title}}
+                </a>
+
+            </div>
+
+        </div>
+    </ng-template>
+</p-sidebar>
+<div>
+
+</div>
+<button (click)="isVisible = true" icon="pi pi-arrow-right">Sidebar</button>

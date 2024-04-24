@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { User } from '../../../models/user.model';
 
 
 @Component({
@@ -25,21 +26,30 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  public userName: string = '';
-  public password: string = '';
+
+  public user: User = {
+    email: '',
+    password: '',
+    userName: 'Test user',
+  }
+
   private _routerService = inject(Router);
   private _toastService = inject(MessageService);
 
   public setAdminCredentials(): void {
-    this.userName = 'admin@mail.com';
-    this.password = 'admin';
+    this.user.email = 'admin@mail.com';
+    this.user.password = 'admin';
   }
 
   public handleLogin(): void {
-    if (this.userName.length > 5 && this.password.length >= 5) {
+    const { email, password } = this.user;
+
+    // Validar bien los datos cuando se integre con firebase
+    if (email!.length > 5 && password!.length >= 5) {
+      localStorage.setItem('user', JSON.stringify(this.user));
       this._routerService.navigateByUrl('home');
     } else {
-      this._toastService.add({ severity: 'error', summary: 'Error', detail: 'El usuario ingresado no existe' });
+      this._toastService.add({ severity: 'error', summary: 'Error', detail: 'Error al iniciar sesion' });
     }
   }
 }
