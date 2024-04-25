@@ -1,4 +1,12 @@
 <div class="page-content">
     <sidebar />
-    <p>home works!</p>
+
+    <h1 class="title">Inicio</h1>
+
+    <div class="games-section">
+        <div class="game-card" *ngFor="let game of gamesList">
+            {{game.name}}
+        </div>
+    </div>
+
 </div>

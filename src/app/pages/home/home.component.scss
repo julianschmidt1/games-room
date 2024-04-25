@@ -5,4 +5,28 @@
 
 .page-content {
     overflow: auto;
+
+    .title {
+        color: $text-color-1;
+        margin-left: 50px
+    }
+
+    .games-section {
+        @include display-flex();
+        @include justify-content(center);
+        width: 100%;
+        padding: 0px 20px;
+        gap: 30px;
+        flex-wrap: wrap;
+        
+        .game-card {
+            @include center-content();
+            min-width: 290px;
+            min-height: 175px;
+            background-color: $primary-color-1;
+            border-radius: 8px;
+            
+        }
+    }
+    
 }
