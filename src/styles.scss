@@ -17,9 +17,9 @@ body {
 }
 
 .page-content {
-    @include center-content();
     height: 100%;
     width: 100%;
+    padding-top: 65px;
 }
 
 
@@ -32,7 +32,7 @@ body {
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    color: white;
+    color: $base-white;
 }
 
 input {
@@ -45,5 +45,5 @@ input {
 }
 
 label {
-    color: white;
+    color: $base-white;
 }
