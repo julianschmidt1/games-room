@@ -1,0 +1,24 @@
+<div class="screen">
+    <p-toast />
+    <div class="login-layout">
+
+        <div class="logo-container">
+            <img src="../../../assets/icon-full.svg" alt="GamesRoom Icon">
+        </div>
+
+        <div class="credentials">
+            <h1 class="login-title">Registrate</h1>
+
+            <label>Correo electrónico</label>
+            <input type="text" name="email" autocomplete="off" pInputText [(ngModel)]="email" />
+
+            <label>Contraseña</label>
+            <input type="password" name="password" pInputText [(ngModel)]="password" />
+            
+            <div class="action-buttons">
+                <button class="custom-button" (click)="handleRegister()">Crear cuenta</button>
+            </div>
+        </div>
+
+    </div>
+</div>

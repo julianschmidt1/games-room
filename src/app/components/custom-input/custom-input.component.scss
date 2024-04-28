@@ -1,0 +1,22 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.custom-input-container {
+    @include display-flex();
+    @include flex-direction(column);
+    margin: 10px 0;
+
+    input {
+        padding: 5px;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.2rem $primary-color-1;
+        border-color: none;
+    }
+
+    label {
+        color: $base-white;
+        margin-bottom: 8px;
+    }
+}

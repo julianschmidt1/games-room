@@ -96,6 +96,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "games-room:build:production",
+              "serveTarget": "games-room:serve:production"
+            },
+            "development": {
+              "buildTarget": "games-room:build:development",
+              "serveTarget": "games-room:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

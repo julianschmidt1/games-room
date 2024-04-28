@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
 import { User } from '../../../models/user.model';
-
+import { ToastService } from '../../services/toast-service.service';
+import { ToastModule } from 'primeng/toast';
+import { CustomInputComponent } from '../../components/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +17,8 @@ import { User } from '../../../models/user.model';
     FormsModule,
     InputTextModule,
     ButtonModule,
-    ToastModule
-  ],
-  providers: [
-    MessageService
+    ToastModule,
+    CustomInputComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -34,7 +32,7 @@ export class LoginComponent {
   }
 
   private _routerService = inject(Router);
-  private _toastService = inject(MessageService);
+  private _toastService = inject(ToastService);
 
   public setAdminCredentials(): void {
     this.user.email = 'admin@mail.com';
@@ -49,7 +47,7 @@ export class LoginComponent {
       localStorage.setItem('user', JSON.stringify(this.user));
       this._routerService.navigateByUrl('home');
     } else {
-      this._toastService.add({ severity: 'error', summary: 'Error', detail: 'Error al iniciar sesion' });
+      this._toastService.errorMessage('Error al iniciar sesion');
     }
   }
 }

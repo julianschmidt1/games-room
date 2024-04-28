@@ -61,6 +61,10 @@
         margin-bottom: $space-5;
     }
 
+    a {
+        color: $base-white;
+    }
+
     @keyframes floatAnimation {
         0% {
             transform: translateX(0) rotate(0);
