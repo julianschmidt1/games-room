@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
 import { ToastService } from '../../services/toast-service.service';
 import { Router } from '@angular/router';
+import { authErrorMessage } from '../../helpers/authError.helper';
 
 @Component({
   selector: 'app-register',
@@ -25,26 +26,28 @@ export class RegisterComponent {
   public password: string = '';
   public username: string = '';
 
-  private auth = inject(Auth);
+  private _auth = inject(Auth);
   private _toastService = inject(ToastService);
   private _routerService = inject(Router);
 
   public async handleRegister() {
     const newUsername = this.username.trim();
+    const newEmail = this.email.trim();
 
-    if (!this.email || !this.password) {
+    if (!newEmail || !this.password) {
       this._toastService.errorMessage('Uno de los campos esta vacio.');
       return;
     }
 
     if (newUsername.length < 6 || newUsername.length > 12) {
       this._toastService.errorMessage('El nombre de usuario debe tener por lo menos 6 caracteres.');
+      return;
     }
 
-    createUserWithEmailAndPassword(this.auth, this.email, this.password).then(() => {
+    createUserWithEmailAndPassword(this._auth, newEmail, this.password).then(() => {
       this._toastService.successMessage('Usuario registrado con éxito');
 
-      signInWithEmailAndPassword(this.auth, this.email, this.password).then(async (loggedUserData) => {
+      signInWithEmailAndPassword(this._auth, newEmail, this.password).then(async (loggedUserData) => {
         const { user } = loggedUserData;
         const { email, photoURL } = user;
         await updateProfile(user, { displayName: this.username });
@@ -54,20 +57,9 @@ export class RegisterComponent {
       });
     })
       .catch(e => {
-        switch (e.code) {
-          case 'auth/invalid-email':
-            this._toastService.errorMessage('El correo ingresado no es valido.');
-            break;
-          case "auth/email-already-in-use":
-            this._toastService.errorMessage('El correo ingresado ya fue registrado.');
-            break;
-          case "auth/weak-password":
-            this._toastService.errorMessage('La contraseña debe tener por lo menos 6 caracteres.');
-            break;
-          default:
-            this._toastService.errorMessage('Ocurrio un error.');
-            console.log(e);
-        }
+        const error = authErrorMessage(e.code);
+        this._toastService.errorMessage(error);
+        console.log(error);
       })
   }
 }
