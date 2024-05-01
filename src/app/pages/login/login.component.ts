@@ -28,7 +28,7 @@ export class LoginComponent {
   public user: User = {
     email: '',
     password: '',
-    userName: 'Test user',
+    username: '',
   }
 
   private _routerService = inject(Router);
