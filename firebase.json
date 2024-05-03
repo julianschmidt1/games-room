@@ -1,6 +1,7 @@
 {
   "hosting": [
     {
+      "target": "games-room",
       "public": "public",
       "ignore": [
         "firebase.json",
