@@ -42,7 +42,7 @@ export class RegisterComponent {
     }
 
     if (newUsername.length < 6 || newUsername.length > 12) {
-      this._toastService.errorMessage('El nombre de usuario debe tener por lo menos 6 caracteres.');
+      this._toastService.errorMessage('El nombre de usuario debe tener entre 6 y 12 caracteres.');
       return;
     }
 
