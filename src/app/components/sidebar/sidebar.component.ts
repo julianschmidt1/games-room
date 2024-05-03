@@ -28,7 +28,6 @@ export class SidebarComponent {
     if (user) {
       this.loggedUser = JSON.parse(user);
     }
-    console.log(this.loggedUser)
 
     this.navigationOptions = [
       { title: 'Inicio', navigateTo: '/home' },

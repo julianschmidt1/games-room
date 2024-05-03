@@ -6,3 +6,8 @@ export const firebaseConfig = {
     "authDomain": "gamesroom-73654.firebaseapp.com",
     "messagingSenderId": "65820161965"
 }
+
+export const adminUser = {
+    email: 'admin@mail.com',
+    password: 'admin123'
+}

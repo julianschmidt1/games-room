@@ -4,9 +4,10 @@ import { ToastModule } from 'primeng/toast';
 import { CustomInputComponent } from '../../components/custom-input/custom-input.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
-import { ToastService } from '../../services/toast-service.service';
+import { ToastService } from '../../services/toast.service';
 import { Router } from '@angular/router';
 import { authErrorMessage } from '../../helpers/authError.helper';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterComponent {
   private _auth = inject(Auth);
   private _toastService = inject(ToastService);
   private _routerService = inject(Router);
+  private _loggerService = inject(LoggerService);
 
   public async handleRegister() {
     const newUsername = this.username.trim();
@@ -51,8 +53,9 @@ export class RegisterComponent {
         const { user } = loggedUserData;
         const { email, photoURL } = user;
         await updateProfile(user, { displayName: this.username });
-
+        
         localStorage.setItem('user', JSON.stringify({ username: this.username, email, photoURL }));
+        this._loggerService.createLog(this.username, 'logins');
         this._routerService.navigateByUrl('home');
       });
     })

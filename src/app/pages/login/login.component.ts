@@ -5,11 +5,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { User } from '../../../models/user.model';
-import { ToastService } from '../../services/toast-service.service';
+import { ToastService } from '../../services/toast.service';
 import { ToastModule } from 'primeng/toast';
 import { CustomInputComponent } from '../../components/custom-input/custom-input.component';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { authErrorMessage } from '../../helpers/authError.helper';
+import { adminUser } from '../../../environments/environment';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'app-login',
@@ -36,10 +38,12 @@ export class LoginComponent {
   private _routerService = inject(Router);
   private _toastService = inject(ToastService);
   private _auth = inject(Auth);
+  private _loggerService = inject(LoggerService);
 
   public setAdminCredentials(): void {
-    this.user.email = 'admin@mail.com';
-    this.user.password = 'admin';
+    const { email, password } = adminUser;
+    this.user.email = email;
+    this.user.password = password;
   }
 
   public handleLogin(): void {
@@ -55,6 +59,7 @@ export class LoginComponent {
       const { displayName, email, photoURL } = user;
 
       localStorage.setItem('user', JSON.stringify({ username: displayName, email, photoURL }));
+      this._loggerService.createLog(displayName || email!, 'logins');
       this._routerService.navigateByUrl('home');
     }).catch(e => {
       const error = authErrorMessage(e.code);
