@@ -1,0 +1,64 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+
+
+.chat-container {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 350px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 2px solid $primary-color-1;
+
+    .toggle-chat-bar {
+        background-color: $primary-color-1;
+        width: inherit;
+        padding: 8px
+    }
+    
+    i::before{
+        color: $primary-color-2;
+        bottom: 6px;
+        right: 15px;
+        position: absolute;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+    .chat-list-container {
+        @include display-flex();
+        @include flex-direction(column);
+        background-color: $background-1;
+        overflow-y: scroll;
+        height: 250px;
+
+        .message {
+            padding: 5px;
+            margin: 4px;
+            border-radius: 8px;
+            max-width: 280px;
+            color: $base-white;
+        }
+
+        .mine {
+            align-self: flex-end;
+            border-bottom-right-radius: 0px;
+            background-color: $primary-color-1;
+        }
+
+        .others {
+            align-self: flex-start;
+            border-top-left-radius: 0px;
+            background-color: $primary-color-2;
+        }
+    }
+
+    .chat-input-container {
+        width: inherit;
+
+        input {
+            width: inherit;
+        }
+    }
+}

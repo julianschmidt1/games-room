@@ -47,3 +47,20 @@ input {
 label {
     color: $base-white;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $background-1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $primary-color-1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $primary-color-2;
+}
