@@ -42,8 +42,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     this.chatSubscription = obs.subscribe({
       next: (response) => {
-        const castedResponse = response as Array<any>
-        this.messages = castedResponse.sort((a, b) => a?.date.toDate().getTime() - b?.date.toDate().getTime());
+        const castedResponse = response as Array<MessageModel>
+        this.messages = castedResponse.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
       },
       error: (error) => {
         this._toastService.errorMessage('Ocurrio un error al cargar los mensajes');
@@ -75,7 +75,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     if (event.key === 'Enter' || iconPress) {
       const messageObject: MessageModel = {
         message: newMessage,
-        date: new Date(),
+        date: new Date().toISOString(),
         createdBy: this.currentUser?.email,
         displayName: this.currentUser?.displayName
       }
@@ -90,7 +90,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 interface MessageModel {
   message: string,
-  date: Date,
+  date: string,
   createdBy: string,
   displayName: string,
 } 

@@ -6,9 +6,14 @@
         <div #chatScroll class="chat-list-container">
             <ng-container *ngFor="let message of messages">
                 <div class="message" [class]="message.createdBy === currentUser?.email ? 'mine' : 'others'">
-                    <span class="user-name" [ngStyle]="{'color': stringToColor(message.createdBy)}">
-                        {{message.displayName}}
-                    </span>
+                    <div class="user-name" [ngStyle]="{'color': stringToColor(message.createdBy)}">
+                        <span *ngIf="message.createdBy !== currentUser?.email">
+                            {{message.displayName}}
+                        </span>
+                        <span class="date">
+                            {{message.date | date: 'shortTime'}}
+                        </span>
+                    </div>
                     {{message.message}}
                 </div>
             </ng-container>
