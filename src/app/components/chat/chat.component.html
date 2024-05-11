@@ -3,16 +3,20 @@
 
     <ng-container *ngIf="visible">
 
-        <div id="chat-scroll" class="chat-list-container">
+        <div #chatScroll class="chat-list-container">
             <ng-container *ngFor="let message of messages">
                 <div class="message" [class]="message.createdBy === currentUser?.email ? 'mine' : 'others'">
+                    <span class="user-name" [ngStyle]="{'color': stringToColor(message.createdBy)}">
+                        {{message.displayName}}
+                    </span>
                     {{message.message}}
                 </div>
             </ng-container>
         </div>
 
         <div class="chat-input-container">
-            <input [(ngModel)]="newMessage" type="text" placeholder="Crea un mensaje" (keypress)="handleSubmitMessage($event)">
+            <input [(ngModel)]="newMessage" type="text" placeholder="Crea un mensaje"
+                (keypress)="handleSubmitMessage($event)">
             <i (click)="handleSubmitMessage($event, true)" class="pi pi-send"></i>
         </div>
 

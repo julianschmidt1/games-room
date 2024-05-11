@@ -34,11 +34,17 @@
         height: 250px;
 
         .message {
+            @include display-flex();
+            @include flex-direction(column);
             padding: 5px;
             margin: 4px;
             border-radius: 8px;
             max-width: 280px;
             color: $base-white;
+            
+            .user-name {
+                font-weight: bold;
+            }
         }
 
         .mine {
