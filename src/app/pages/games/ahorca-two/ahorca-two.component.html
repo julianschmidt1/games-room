@@ -1,0 +1,33 @@
+<div class="page-content">
+    <sidebar />
+    <chat-list />
+    <h1 class="title">Ahorcado</h1>
+
+    <div class="output-container">
+
+        <div class="key-word">
+            <span *ngFor="let letter of wordToReveal.splittedWord">
+                {{getRevealedWord(letter)}}
+            </span>
+            <!-- {{wordToReveal.fullWord}} -->
+            <div style="display: flex;">
+            </div>
+            <!-- <span *ngFor="let underscore of wordToReveal.splittedWord">
+                _
+            </span> -->
+        </div>
+
+        <div class="">
+
+        </div>
+
+    </div>
+
+    <div class="keyboard-container">
+
+        <div class="key" *ngFor="let key of keyboard" (click)="handleSelectKey(key)">
+            {{key}}
+        </div>
+    </div>
+
+</div>

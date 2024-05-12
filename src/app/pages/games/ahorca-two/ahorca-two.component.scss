@@ -1,0 +1,41 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+
+.page-content {
+    padding-left: 50px;
+
+    .title {
+        color: $text-color-1;
+    }
+
+    .output-container {
+        .key-word {
+            color: $base-white;
+        }
+    }
+
+    .keyboard-container {
+        display: grid;
+        max-width: 90%;
+        grid-template-columns: repeat(10, 1fr);
+
+        .key {
+            @include display-flex();
+            @include justify-content(center);
+            transition: 0.3s all;
+            border-radius: 6px;
+
+            padding: 6px;
+            margin: 8px;
+            background-color: $primary-color-1;
+            cursor: pointer;
+            color: $base-black;
+            font-size: 24px;
+
+            &:hover {
+                background-color: $primary-color-2;
+                color: $base-white;
+            }
+        }
+    }
+}

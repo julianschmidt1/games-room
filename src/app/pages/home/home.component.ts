@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from '../../components/chat/chat.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home-screen',
@@ -15,13 +16,20 @@ import { ChatComponent } from '../../components/chat/chat.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
+  private _router = inject(Router);
   public gamesList: Array<GameModel> = [
-    { name: 'Ahorcado', },
-    { name: 'Pregunta2', },
-    { name: 'Diablo II', },
-  ]
+    { name: 'Ahorca2', path: 'ahorcatwo' },
+    { name: 'Mayor y Menor', path: 'majorminor' },
+    { name: 'Diablo II', path: '' },
+  ];
+
+  public handleGameNavigation(path: string){
+    this._router.navigateByUrl(`games/${path}`);
+  }
 }
 
 interface GameModel {
-  name: string
+  name: string,
+  path: string,
 }

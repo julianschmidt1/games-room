@@ -4,7 +4,7 @@
     <h1 class="title">Inicio</h1>
 
     <div class="games-section">
-        <div class="game-card" *ngFor="let game of gamesList">
+        <div class="game-card" *ngFor="let game of gamesList" (click)="handleGameNavigation(game.path)">
             {{game.name}}
         </div>
     </div>

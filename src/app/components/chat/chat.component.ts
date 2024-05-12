@@ -23,12 +23,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   private _auth = inject(Auth);
   private _firestore = inject(Firestore);
   private _toastService = inject(ToastService);
-  public visible: boolean = true;
+  public visible: boolean = false;
   public currentUser: any;
   public newMessage: string = '';
-  private chatSubscription!: Subscription;
   public messages: Array<MessageModel> = [];
-
+  public chatSubscription!: Subscription;
 
   public ngOnInit(): void {
     this._auth.onAuthStateChanged((loggedUser) => {
@@ -50,7 +49,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         console.log(error);
       }
     })
-
   }
 
   ngAfterViewChecked(): void {
