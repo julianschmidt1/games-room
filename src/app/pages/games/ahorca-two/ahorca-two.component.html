@@ -4,7 +4,7 @@
     <h1 class="title">Ahorcado</h1>
 
 
-    <ng-container *ngIf="currentGameState?.inGame">
+    <ng-container *ngIf="(currentGameState?.inGame && !currentGameState?.victory)">
         <div class="output-container">
 
             <div class="key-word">
@@ -16,10 +16,42 @@
             <div class="remaining-tries">
                 Intentos restantes: {{currentGameState?.triesLeft}}
             </div>
-            
+
+            <div class="tries-body-container"
+                *ngIf="currentGameState && currentGameState.triesLeft <= 6 && (!currentGameState?.inGame)">
+                <div class="row">
+                    <div></div>
+                    <div>
+                        <ng-container *ngIf="currentGameState.triesLeft <= 5;">☠️</ng-container>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="row">
+                    <div>
+                        <ng-container *ngIf="currentGameState.triesLeft <= 3;">💪🏼</ng-container>
+                    </div>
+                    <div>
+                        <ng-container *ngIf="currentGameState.triesLeft <= 4;">👕</ng-container>
+                    </div>
+                    <div>
+                        <ng-container *ngIf="currentGameState.triesLeft <= 2;">💪🏼</ng-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <ng-container *ngIf="currentGameState.triesLeft <= 1;">🦵🏼</ng-container>
+                    </div>
+                    <div></div>
+                    <div>
+                        <ng-container *ngIf="currentGameState.triesLeft <= 0;">🦵🏼</ng-container>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="keyboard-container">
+        <div class="keyboard-container" *ngIf="currentGameState?.inGame">
             <div *ngFor="let key of keyboard" (click)="handleSelectKey(key)" class="key"
                 [ngClass]="selectedLetterStyle(key)">
                 {{key}}
