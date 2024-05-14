@@ -3,27 +3,39 @@
     <chat-list />
     <h1 class="title">Ahorcado</h1>
 
-    <div class="output-container">
 
-        <div class="key-word">
-            <span *ngFor="let letter of currentWord.splittedWord">
-                {{getRevealedWord(letter)}}
-            </span>
-            <div style="display: flex;">
+    <ng-container *ngIf="currentGameState?.inGame">
+        <div class="output-container">
+
+            <div class="key-word">
+                <span *ngFor="let letter of currentWord.splittedWord">
+                    {{getRevealedWord(letter)}}
+                </span>
+            </div>
+
+            <div class="remaining-tries">
+                Intentos restantes: {{currentGameState?.triesLeft}}
+            </div>
+            
+        </div>
+
+        <div class="keyboard-container">
+            <div *ngFor="let key of keyboard" (click)="handleSelectKey(key)" class="key"
+                [ngClass]="selectedLetterStyle(key)">
+                {{key}}
             </div>
         </div>
+    </ng-container>
 
-        <div class="">
-
-        </div>
+    <div class="title-container">
+        <ng-container *ngIf="currentGameState?.victory">
+            <h1>GANASTE 😎</h1>
+            <h2>Tu palabra es: {{currentWord.fullWord}}</h2>
+        </ng-container>
+        <h1 *ngIf="!currentGameState?.victory && !currentGameState?.triesLeft">PERDISTE ☠️</h1>
+        <h1 (click)="handleStartGame()" *ngIf="!currentGameState?.inGame">COMENZAR PARTIDA</h1>
 
     </div>
 
-    <div class="keyboard-container">
-
-        <div class="key" *ngFor="let key of keyboard" (click)="handleSelectKey(key)">
-            {{key}}
-        </div>
-    </div>
 
 </div>

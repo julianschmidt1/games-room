@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AhorcaTwoService } from '../../../services/ahorca-two.service';
 import { RevealWordModel } from './models/reveal-word.model';
 import { GameStateModel } from './models/game-state.model';
+import { SelectedKeyModel } from './models/selected-key.model';
 
 @Component({
   selector: 'ahorca-two',
@@ -27,8 +28,12 @@ export class AhorcaTwoComponent implements OnInit {
     this._ahorcaTwoService.game$.subscribe(gameData => {
       this.currentGameState = gameData;
       console.log(gameData);
-      
+
     });
+  }
+
+  public handleStartGame(): void{
+    this._ahorcaTwoService.startNewGame();
   }
 
   public handleSelectKey(key: string): void {
@@ -37,6 +42,19 @@ export class AhorcaTwoComponent implements OnInit {
 
   public getRevealedWord(letter: string): string {
     return this._ahorcaTwoService.getRevealedLetter(letter);
+  }
+
+  public selectedLetterStyle(letter: string): string {
+    const currentKeysState: Array<SelectedKeyModel> = this._ahorcaTwoService.getSelectedKeys();
+    const key = currentKeysState.find(k => k.key === letter);
+
+    return key ?
+      (
+        key?.correctLetter
+          ? 'success'
+          : 'error'
+      )
+      : ''
   }
 
 }

@@ -12,21 +12,19 @@ export class AhorcaTwoService {
   public words: Array<string> = ["Tabata", "Reiki", "Falopa"];
   private _selectedKeys: Array<SelectedKeyModel> = [];
   private _wordToReveal: RevealWordModel = { fullWord: '', splittedWord: [] };
-  private _gameStateSubject = new BehaviorSubject({ inGame: false, triesLeft: 0 });
+  private _gameStateSubject = new BehaviorSubject({ inGame: false, triesLeft: 6, victory: false });
   public game$ = this._gameStateSubject.asObservable();
 
-  constructor() {
-    // this.wordToReveal.fullWord = wod
-    this.startNewGame();
-  }
+  constructor() { }
 
   public startNewGame(): void {
     const wordIndex = 1; //random?
     const selectedWord = this.words[wordIndex].toUpperCase();
     this._wordToReveal.fullWord = selectedWord;
     this._wordToReveal.splittedWord = selectedWord.split('');
+    this._selectedKeys = [];
 
-    this._gameStateSubject.next({ inGame: true, triesLeft: 6 });
+    this._gameStateSubject.next({ inGame: true, triesLeft: 6, victory: false });
   }
 
   public getRevealedLetter(letter: string): string {
@@ -42,24 +40,29 @@ export class AhorcaTwoService {
     if (keyState) return;
 
     const correctLetter = this._wordToReveal.splittedWord.includes(key);
-
-    if (!correctLetter) {
-      console.log('aca');
-      const currentData: GameStateModel = this._gameStateSubject.getValue();
-      let newState: GameStateModel;
-      if (currentData.triesLeft > 1) {
-        newState = { ...currentData, triesLeft: currentData.triesLeft - 1 };
-      } else {
-        newState = { inGame: false, triesLeft: 0, };
-      }
-
-      this._gameStateSubject.next(newState);
-    }
-
     this._selectedKeys = [
       ...this._selectedKeys,
       { key, correctLetter }
     ];
+
+    let gameState: GameStateModel = this._gameStateSubject.getValue();
+    if (!correctLetter) {
+
+      if (gameState.triesLeft > 1) {
+        gameState = { ...gameState, triesLeft: gameState.triesLeft - 1 };
+      } else {
+        gameState = { inGame: false, triesLeft: 0, victory: false };
+      }
+
+    } else {
+      const correctKeys = this._selectedKeys.filter(k => k.correctLetter);
+      if (this._wordToReveal.splittedWord.every(k => correctKeys.some(ck => k === ck.key))) {
+
+        gameState = { inGame: false, victory: true, triesLeft: gameState.triesLeft }
+      }
+    }
+    
+    this._gameStateSubject.next(gameState);
   }
 
   private getKeyState(letter: string): SelectedKeyModel | undefined {
@@ -73,8 +76,4 @@ export class AhorcaTwoService {
   public getSelectedKeys(): Array<SelectedKeyModel> {
     return this._selectedKeys;
   }
-
-  // public getGameState(): GameStateModel {
-  //   return this._gameStateSubject;
-  // }
 }

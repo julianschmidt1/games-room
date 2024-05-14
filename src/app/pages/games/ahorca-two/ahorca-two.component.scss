@@ -2,15 +2,37 @@
 @import '../../../styles/colors.scss';
 
 .page-content {
-    padding-left: 50px;
 
     .title {
         color: $text-color-1;
+        padding-left: 50px;
     }
 
     .output-container {
+        color: $base-white;
+        padding-left: 50px;
+
         .key-word {
-            color: $base-white;
+            font-size: 40px;
+
+        }
+
+        .remaining-tries {
+            font-size: 20px;
+        }
+    }
+
+    .title-container {
+        @include display-flex();
+        @include justify-content(center);
+        @include flex-direction(column);
+        @include align-items(center);
+        color: $base-white;
+
+        h1 {
+            font-size: 34px;
+            cursor: pointer;
+            animation: floatAnimation 2s ease infinite alternate;
         }
     }
 
@@ -18,6 +40,7 @@
         display: grid;
         max-width: 90%;
         grid-template-columns: repeat(10, 1fr);
+        padding-left: 50px;
 
         .key {
             @include display-flex();
@@ -37,5 +60,32 @@
                 color: $base-white;
             }
         }
+
+        .success {
+            background-color: $success-color-1;
+
+            &:hover {
+                background-color: $success-color-1;
+            }
+        }
+
+        .error {
+            background-color: $danger-color-1;
+
+            &:hover {
+                background-color: $danger-color-1;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateX(0) rotate(-1deg);
+    }
+
+    100% {
+        transform: translateX(10px) rotate(1deg);
     }
 }
