@@ -82,6 +82,7 @@
     width: 100vw;
     background-color: $primary-color-1;
     padding: 20px;
+    color: $primary-color-3;
 
     .logo-row {
         @include display-flex();

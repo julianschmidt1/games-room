@@ -6,15 +6,11 @@
     <div class="output-container">
 
         <div class="key-word">
-            <span *ngFor="let letter of wordToReveal.splittedWord">
+            <span *ngFor="let letter of currentWord.splittedWord">
                 {{getRevealedWord(letter)}}
             </span>
-            <!-- {{wordToReveal.fullWord}} -->
             <div style="display: flex;">
             </div>
-            <!-- <span *ngFor="let underscore of wordToReveal.splittedWord">
-                _
-            </span> -->
         </div>
 
         <div class="">
