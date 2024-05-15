@@ -16,39 +16,6 @@
             <div class="remaining-tries">
                 Intentos restantes: {{currentGameState?.triesLeft}}
             </div>
-
-            <div class="tries-body-container"
-                *ngIf="currentGameState && currentGameState.triesLeft <= 6 && (!currentGameState?.inGame)">
-                <div class="row">
-                    <div></div>
-                    <div>
-                        <ng-container *ngIf="currentGameState.triesLeft <= 5;">☠️</ng-container>
-                    </div>
-                    <div></div>
-                </div>
-                <div class="row">
-                    <div>
-                        <ng-container *ngIf="currentGameState.triesLeft <= 3;">💪🏼</ng-container>
-                    </div>
-                    <div>
-                        <ng-container *ngIf="currentGameState.triesLeft <= 4;">👕</ng-container>
-                    </div>
-                    <div>
-                        <ng-container *ngIf="currentGameState.triesLeft <= 2;">💪🏼</ng-container>
-                    </div>
-                </div>
-                <div class="row">
-                    <div>
-                        <ng-container *ngIf="currentGameState.triesLeft <= 1;">🦵🏼</ng-container>
-                    </div>
-                    <div></div>
-                    <div>
-                        <ng-container *ngIf="currentGameState.triesLeft <= 0;">🦵🏼</ng-container>
-                    </div>
-                </div>
-
-            </div>
-
         </div>
 
         <div class="keyboard-container" *ngIf="currentGameState?.inGame">
@@ -58,7 +25,39 @@
             </div>
         </div>
     </ng-container>
+    <div class="result">
+        <div class="tries-body-container"
+            *ngIf="(currentGameState && currentGameState.inGame) || (currentGameState && currentGameState?.triesLeft === 0)">
+            <div class="row">
+                <div></div>
+                <div>
+                    <ng-container *ngIf="currentGameState.triesLeft <= 5;">☠️</ng-container>
+                </div>
+                <div></div>
+            </div>
+            <div class="row">
+                <div>
+                    <ng-container *ngIf="currentGameState.triesLeft <= 3;">💪🏼</ng-container>
+                </div>
+                <div>
+                    <ng-container *ngIf="currentGameState.triesLeft <= 4;">👕</ng-container>
+                </div>
+                <div>
+                    <ng-container *ngIf="currentGameState.triesLeft <= 2;">💪🏼</ng-container>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <ng-container *ngIf="currentGameState.triesLeft <= 1;">🦵🏼</ng-container>
+                </div>
+                <div></div>
+                <div>
+                    <ng-container *ngIf="currentGameState.triesLeft <= 0;">🦵🏼</ng-container>
+                </div>
+            </div>
 
+        </div>
+    </div>
     <div class="title-container">
         <ng-container *ngIf="currentGameState?.victory">
             <h1>GANASTE 😎</h1>

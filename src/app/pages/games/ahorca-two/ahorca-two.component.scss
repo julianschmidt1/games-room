@@ -8,10 +8,10 @@
         padding-left: 50px;
     }
 
-    .output-container {
+    .result {
         @include display-flex();
-        color: $base-white;
-        padding-left: 50px;
+        @include justify-content(center);
+        width: 100%;
 
         .tries-body-container {
             @include display-flex();
@@ -19,20 +19,24 @@
             width: 220px;
             height: 220px;
             font-size: 50px;
-            // background-color: red;
 
             .row {
                 @include display-flex();
                 @include justify-content(space-evenly);
                 width: 100%;
-                // background-color: blue;
                 height: 33%;
             }
         }
+    }
+
+    .output-container {
+        @include display-flex();
+        @include flex-direction(column);
+        color: $base-white;
+        padding-left: 50px;
 
         .key-word {
             font-size: 40px;
-
         }
 
         .remaining-tries {

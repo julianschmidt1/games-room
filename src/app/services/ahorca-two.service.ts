@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AhorcaTwoService {
 
-  public words: Array<string> = ["Tabata", "Reiki", "Falopa"];
+  public words: Array<string> = happyWords;
   private _selectedKeys: Array<SelectedKeyModel> = [];
   private _wordToReveal: RevealWordModel = { fullWord: '', splittedWord: [] };
   private _gameStateSubject = new BehaviorSubject({ inGame: false, triesLeft: 6, victory: false });
@@ -18,8 +18,7 @@ export class AhorcaTwoService {
   constructor() { }
 
   public startNewGame(): void {
-    const wordIndex = 1; //random?
-    const selectedWord = this.words[wordIndex].toUpperCase();
+    const selectedWord = this.getRandomWord();
     this._wordToReveal.fullWord = selectedWord;
     this._wordToReveal.splittedWord = selectedWord.split('');
     this._selectedKeys = [];
@@ -33,6 +32,11 @@ export class AhorcaTwoService {
     }
 
     return '-';
+  }
+
+  private getRandomWord(): string {
+    const wordIndex = Math.floor(Math.random() * this.words.length);
+    return this.words[wordIndex].toUpperCase();
   }
 
   public addKey(key: string): void {
@@ -61,7 +65,7 @@ export class AhorcaTwoService {
         gameState = { inGame: false, victory: true, triesLeft: gameState.triesLeft }
       }
     }
-    
+
     this._gameStateSubject.next(gameState);
   }
 
@@ -77,3 +81,45 @@ export class AhorcaTwoService {
     return this._selectedKeys;
   }
 }
+
+const happyWords = [
+  "Amor",
+  "Felicidad",
+  "Sonrisa",
+  "Paz",
+  "Alegria",
+  "Esperanza",
+  "Bondad",
+  "Gratitud",
+  "Armonia",
+  "Amistad",
+  "Optimismo",
+  "Sinceridad",
+  "Risas",
+  "Compasion",
+  "Ternura",
+  "Abrazo",
+  "Risueño",
+  "Bendicion",
+  "Serenidad",
+  "Dulzura",
+  "Encanto",
+  "Exito",
+  "Generosidad",
+  "Agradecimiento",
+  "Plenitud",
+  "Libertad",
+  "Admiracion",
+  "Maravilla",
+  "Encantamiento",
+  "Solidaridad",
+  "Confianza",
+  "Vitalidad",
+  "Esplendor",
+  "Resplandor",
+  "Inspiracion",
+  "Extasis",
+  "Fascinacion",
+  "Entusiasmo",
+  "Esperanza"
+];

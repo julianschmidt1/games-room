@@ -11,10 +11,8 @@ import { SelectedKeyModel } from './models/selected-key.model';
 })
 export class AhorcaTwoComponent implements OnInit {
 
-  // component states
   public keyboard: string[] = [];
 
-  // service states
   public _ahorcaTwoService = inject(AhorcaTwoService);
   public currentWord: RevealWordModel = this._ahorcaTwoService.getCurrentWord();
   public currentGameState: GameStateModel | undefined;
@@ -32,7 +30,7 @@ export class AhorcaTwoComponent implements OnInit {
     });
   }
 
-  public handleStartGame(): void{
+  public handleStartGame(): void {
     this._ahorcaTwoService.startNewGame();
   }
 
