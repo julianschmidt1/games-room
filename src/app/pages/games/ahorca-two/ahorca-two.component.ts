@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { AhorcaTwoService } from '../../../services/ahorca-two.service';
 import { RevealWordModel } from './models/reveal-word.model';
 import { GameStateModel } from './models/game-state.model';
@@ -9,7 +9,7 @@ import { SelectedKeyModel } from './models/selected-key.model';
   templateUrl: './ahorca-two.component.html',
   styleUrl: './ahorca-two.component.scss'
 })
-export class AhorcaTwoComponent implements OnInit {
+export class AhorcaTwoComponent implements OnInit, OnDestroy {
 
   public keyboard: string[] = [];
 
@@ -19,15 +19,16 @@ export class AhorcaTwoComponent implements OnInit {
 
   constructor() {
     this.keyboard = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
-    console.log(this.currentWord);
   }
 
   ngOnInit(): void {
     this._ahorcaTwoService.game$.subscribe(gameData => {
       this.currentGameState = gameData;
-      console.log(gameData);
-
     });
+  }
+
+  ngOnDestroy(): void {
+    this.handleStartGame();
   }
 
   public handleStartGame(): void {
