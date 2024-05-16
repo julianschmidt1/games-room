@@ -8,12 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class MajorMinorService {
 
   public cards: Array<CardModel> = [];
-  private _gameStateSubject = new BehaviorSubject({
-    inGame: false,
-    triesLeft: 10,
-    victory: false,
-    totalScore: 0,
-  });
+  private _gameStateSubject = new BehaviorSubject(initialGameData);
   public game$ = this._gameStateSubject.asObservable();
 
   constructor() { }
@@ -21,7 +16,7 @@ export class MajorMinorService {
   public generateInitialCards() {
     this.cards = sticks.flatMap(stick => {
       let cardsByStick: Array<CardModel> = [];
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 4; i++) {
         cardsByStick = [
           ...cardsByStick,
           { number: i + 1, stick }
@@ -31,23 +26,35 @@ export class MajorMinorService {
     });
   }
 
+  public startNewGame(): void {
+    this._gameStateSubject.next({ ...initialGameData, inGame: true });
+  }
+
+  public setVictoryStatus(): void {
+    const currentGameState = this._gameStateSubject.getValue();
+    this._gameStateSubject.next({ ...currentGameState, victory: true });
+  }
+
   public checkCard(isGreater: boolean, currentCard: CardModel, newCard: CardModel): void {
     const currentGameState = this._gameStateSubject.getValue();
     const isGreaterAndConditionFulfilled = isGreater && newCard.number > currentCard.number;
     const isLesserAndConditionFulfilled = !isGreater && newCard.number < currentCard.number;
-    const equalNumber = newCard.number === currentCard.number; 
+    const equalNumber = newCard.number === currentCard.number;
 
     if (isGreaterAndConditionFulfilled || isLesserAndConditionFulfilled) {
       this._gameStateSubject.next({ ...currentGameState, totalScore: currentGameState.totalScore + 1 });
       console.log('CORRECTO');
       console.log('Current: ', currentCard);
       console.log('newCard: ', newCard);
-      
+
     } else if (!isGreaterAndConditionFulfilled && !isLesserAndConditionFulfilled && !equalNumber) {
       this._gameStateSubject.next({ ...currentGameState, triesLeft: currentGameState.triesLeft - 1 });
+
+
       console.log('INCORRECTO');
       console.log('Current: ', currentCard);
       console.log('newCard: ', newCard);
+
     } else {
       console.log('Es igual, no cumple nada :{');
     }
@@ -67,3 +74,10 @@ const sticks = [
   'Copa',
   'Oro',
 ]
+
+const initialGameData = {
+  inGame: false,
+  triesLeft: 10,
+  victory: false,
+  totalScore: 0,
+}

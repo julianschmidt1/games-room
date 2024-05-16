@@ -14,6 +14,7 @@
         @include justify-content(center);
         @include align-items(center);
         width: 100%;
+        color: $base-white;
 
         .selected-card {
             @include display-flex();
@@ -22,8 +23,10 @@
             background-color: $base-white;
             border-radius: 5px;
             padding: 5px;
-            width: 90px;
-            font-size: 30px;
+            width: 160px;
+            height: 240px;
+            font-size: 55px;
+            color: $base-black;
 
             .card-bottom {
                 align-self: flex-end;
@@ -50,6 +53,63 @@
             }
         }
 
+        .initial-game {
 
+            .title-container {
+                @include display-flex();
+                @include justify-content(center);
+
+                animation: floatAnimation 2s ease infinite alternate;
+                .start-game-title {
+                    font-size: 44px;
+                    cursor: pointer;
+                    text-align: center
+                }
+            }
+            
+            .cards {
+                @include display-flex();
+                gap: 40px;
+                margin-top: 40px;
+
+                .left {
+                    margin-top: 25px;
+                    transform: rotate(-20deg);
+                }
+                .right {
+                    margin-top: 25px;
+                    transform: rotate(20deg);
+                }
+            }
+        }
+
+        .action-buttons {
+            @include display-flex();
+            @include justify-content(space-evenly);
+
+            .lesser {
+                background-color: $danger-color-1;
+            }
+
+            .greater {
+                background-color: $success-color-1;
+            }
+        }
+
+        .victory-result-stats {
+            margin-top: 30px;
+            font-size: 28px;
+            color: gold;
+        }
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateX(0) rotate(-1deg);
+    }
+
+    100% {
+        transform: translateX(10px) rotate(1deg);
     }
 }

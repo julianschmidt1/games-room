@@ -23,14 +23,8 @@ export class MajorMinorComponent {
       }
       this.currentGame = data;
       this.triesLeft = tries;
-      console.log('GAME: ',this.currentGame)
+      console.log('GAME: ', this.currentGame)
     })
-
-    const newCard = this._majorMinorService.pickRandomCard();
-    if (newCard) {
-      this.currentCard = newCard;
-    }
-
   }
 
   public getCurrentCardStick(currentCardStick: string): string {
@@ -47,14 +41,27 @@ export class MajorMinorComponent {
     return '';
   }
 
+  public handleStartGame(): void {
+    console.log('start')
+    this._majorMinorService.startNewGame();
+    this._majorMinorService.generateInitialCards();
+
+    const newCard = this._majorMinorService.pickRandomCard();
+    if (newCard) {
+      this.currentCard = newCard;
+    }
+  }
+
   public getNextCard(isGreater: boolean = false): void {
     const newCard = this._majorMinorService.pickRandomCard();
     if (newCard) {
       console.log('------------------------------------------');
-      
+
       this._majorMinorService.checkCard(isGreater, this.currentCard, newCard);
       this.currentCard = newCard;
     } else {
+
+      this._majorMinorService.setVictoryStatus();
       console.log('end game');
     }
 

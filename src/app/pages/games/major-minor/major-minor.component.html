@@ -5,32 +5,93 @@
 
     <div class="game-container">
 
-        <p style="color: white;">Puntos: {{currentGame.totalScore}}</p>
+        <div class="initial-game" *ngIf="!currentGame.inGame">
+            <div class="title-container">
+                <span class="start-game-title" (click)="handleStartGame()">
+                    COMENZAR PARTIDA
+                </span>
+            </div>
+            <div class="cards">
 
-        <div *ngIf="currentCard" class="selected-card">
-            <div class="card-top">
-                {{currentCard.number}}
-            </div>
-            <div class="card-center">
-                {{getCurrentCardStick(currentCard.stick)}}
-            </div>
-            <div class="card-bottom">
-                {{currentCard.number}}
+                <div class="selected-card left">
+                    <div class="card-top">4</div>
+                    <div class="card-center">{{getCurrentCardStick('Espada')}}</div>
+                    <div class="card-bottom">4</div>
+                </div>
+                <div class="selected-card">
+                    <div class="card-top">5</div>
+                    <div class="card-center">{{getCurrentCardStick('Oro')}}</div>
+                    <div class="card-bottom">5</div>
+                </div>
+                <div class="selected-card right">
+                    <div class="card-top">6</div>
+                    <div class="card-center">{{getCurrentCardStick('Copa')}}</div>
+                    <div class="card-bottom">6</div>
+                </div>
+
             </div>
         </div>
 
-        <div class="life-bar">
-            <p>Intentos restantes: {{triesLeft.length}}</p>
-            <img *ngFor="let item of triesLeft" class="full-heart" src="../../../../assets/full-heart.png" alt="">
+        <div class="result">
+            <div class="initial-game">
+                <ng-container *ngIf="currentGame.inGame && !triesLeft.length">
+                    <div class="title-container">
+                        <span class="start-game-title">PERDISTE... 😒💀</span>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="currentGame.victory">
+                    <div class="title-container">
+                        <span class="start-game-title">¡GANASTE! 😎</span>
+                    </div>
+                </ng-container>
+                <div class="title-container" *ngIf="currentGame.inGame && !triesLeft.length || currentGame.victory">
+                    <span class="start-game-title" (click)="handleStartGame()">
+                        COMENZAR PARTIDA
+                    </span>
+                </div>
+                <ng-container *ngIf="currentGame.victory">
+
+                    <div class="victory-result-stats">
+                        <span class="start-game-title">PUNTAJE TOTAL: {{currentGame.totalScore}}</span>
+                        <div class="life-bar">
+                            Vidas restantes:
+                            <img *ngFor="let item of triesLeft" class="full-heart"
+                                src="../../../../assets/full-heart.png" alt="">
+                            ({{triesLeft.length}})
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
         </div>
-        <div>
-            <p style="color: white;">
-                La siguiente carta es:
-            </p>
+
+        <ng-container *ngIf="currentGame.inGame && !currentGame.victory && triesLeft.length">
+            <p>Puntos: {{currentGame.totalScore}}</p>
+
+            <div *ngIf="currentCard" class="selected-card">
+                <div class="card-top">
+                    {{currentCard.number}}
+                </div>
+                <div class="card-center">
+                    {{getCurrentCardStick(currentCard.stick)}}
+                </div>
+                <div class="card-bottom">
+                    {{currentCard.number}}
+                </div>
+            </div>
+
+            <div class="life-bar">
+                <p>Intentos restantes: {{triesLeft.length}}</p>
+                <img *ngFor="let item of triesLeft" class="full-heart" src="../../../../assets/full-heart.png" alt="">
+            </div>
             <div>
-                <button (click)="getNextCard()">Menor</button>
-                <button (click)="getNextCard(true)">Mayor</button>
+                <p>
+                    La siguiente carta es
+                </p>
+                <div class="action-buttons">
+                    <button class="custom-button lesser" (click)="getNextCard()">Menor</button>
+                    <button class="custom-button greater" (click)="getNextCard(true)">Mayor</button>
+                </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </div>
