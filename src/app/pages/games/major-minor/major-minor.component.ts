@@ -46,7 +46,6 @@ export class MajorMinorComponent implements OnDestroy {
   }
 
   public handleStartGame(): void {
-    console.log('start')
     this._majorMinorService.startNewGame();
     this._majorMinorService.generateInitialCards();
 
@@ -58,15 +57,12 @@ export class MajorMinorComponent implements OnDestroy {
 
   public getNextCard(isGreater: boolean = false): void {
     const newCard = this._majorMinorService.pickRandomCard();
-    if (newCard) {
-      console.log('------------------------------------------');
-
+    if (newCard && this._majorMinorService.cards.length) {
       this._majorMinorService.checkCard(isGreater, this.currentCard, newCard);
       this.currentCard = newCard;
     } else {
 
       this._majorMinorService.setVictoryStatus();
-      console.log('end game');
     }
 
   }
