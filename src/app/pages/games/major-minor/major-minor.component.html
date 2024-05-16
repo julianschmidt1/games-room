@@ -1,1 +1,36 @@
-<p>major-minor works!</p>
+<div class="page-content">
+    <sidebar />
+    <chat-list />
+    <h1 class="title">Mayor o Menor</h1>
+
+    <div class="game-container">
+
+        <p style="color: white;">Puntos: {{currentGame.totalScore}}</p>
+
+        <div *ngIf="currentCard" class="selected-card">
+            <div class="card-top">
+                {{currentCard.number}}
+            </div>
+            <div class="card-center">
+                {{getCurrentCardStick(currentCard.stick)}}
+            </div>
+            <div class="card-bottom">
+                {{currentCard.number}}
+            </div>
+        </div>
+
+        <div class="life-bar">
+            <p>Intentos restantes: {{triesLeft.length}}</p>
+            <img *ngFor="let item of triesLeft" class="full-heart" src="../../../../assets/full-heart.png" alt="">
+        </div>
+        <div>
+            <p style="color: white;">
+                La siguiente carta es:
+            </p>
+            <div>
+                <button (click)="getNextCard()">Menor</button>
+                <button (click)="getNextCard(true)">Mayor</button>
+            </div>
+        </div>
+    </div>
+</div>

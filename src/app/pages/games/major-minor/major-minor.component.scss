@@ -1,0 +1,55 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+
+.page-content {
+
+    .title {
+        color: $text-color-1;
+        padding-left: 50px;
+    }
+
+    .game-container {
+        @include display-flex();
+        @include flex-direction(column);
+        @include justify-content(center);
+        @include align-items(center);
+        width: 100%;
+
+        .selected-card {
+            @include display-flex();
+            @include flex-direction(column);
+            @include justify-content(space-between);
+            background-color: $base-white;
+            border-radius: 5px;
+            padding: 5px;
+            width: 90px;
+            font-size: 30px;
+
+            .card-bottom {
+                align-self: flex-end;
+            }
+
+            .card-center {
+                align-self: center;
+            }
+
+            .card-top {
+                align-self: flex-start;
+            }
+        }
+
+        .life-bar {
+
+            p {
+                color: $base-white;
+            }
+
+            .full-heart {
+                height: 20px;
+                width: 20px;
+            }
+        }
+
+
+    }
+}
