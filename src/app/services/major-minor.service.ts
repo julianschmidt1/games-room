@@ -16,7 +16,7 @@ export class MajorMinorService {
   public generateInitialCards() {
     this.cards = sticks.flatMap(stick => {
       let cardsByStick: Array<CardModel> = [];
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 7; i++) {
         cardsByStick = [
           ...cardsByStick,
           { number: i + 1, stick }
