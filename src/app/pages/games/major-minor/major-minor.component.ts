@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { MajorMinorService } from '../../../services/major-minor.service';
 import { CardModel } from './models/card.model';
 
@@ -7,7 +7,7 @@ import { CardModel } from './models/card.model';
   templateUrl: './major-minor.component.html',
   styleUrl: './major-minor.component.scss'
 })
-export class MajorMinorComponent {
+export class MajorMinorComponent implements OnDestroy {
 
   public _majorMinorService = inject(MajorMinorService);
   public triesLeft: Array<number> = [];
@@ -25,6 +25,10 @@ export class MajorMinorComponent {
       this.triesLeft = tries;
       console.log('GAME: ', this.currentGame)
     })
+  }
+
+  ngOnDestroy(): void {
+    this._majorMinorService.endCurrentGame();
   }
 
   public getCurrentCardStick(currentCardStick: string): string {

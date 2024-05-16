@@ -19,12 +19,12 @@ export class HomeComponent {
 
   private _router = inject(Router);
   public gamesList: Array<GameModel> = [
-    { name: 'Ahorca2', path: 'ahorcatwo' },
-    { name: 'Mayor y Menor', path: 'majorminor' },
-    { name: 'Diablo II', path: '' },
+    { name: 'Ahorca2', path: 'ahorcatwo', image: 'ahorca-two' },
+    { name: 'Mayor y Menor', path: 'majorminor', image: 'major-minor' },
+    { name: 'Diablo II', path: '', image: '' },
   ];
 
-  public handleGameNavigation(path: string){
+  public handleGameNavigation(path: string) {
     this._router.navigateByUrl(`games/${path}`);
   }
 }
@@ -32,4 +32,5 @@ export class HomeComponent {
 interface GameModel {
   name: string,
   path: string,
+  image: string,
 }

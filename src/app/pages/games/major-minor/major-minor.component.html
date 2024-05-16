@@ -49,7 +49,7 @@
                         COMENZAR PARTIDA
                     </span>
                 </div>
-                <ng-container *ngIf="currentGame.victory">
+                <ng-container *ngIf="currentGame.victory || currentGame.inGame && currentGame.triesLeft === 0">
 
                     <div class="victory-result-stats">
                         <span class="start-game-title">PUNTAJE TOTAL: {{currentGame.totalScore}}</span>
@@ -81,6 +81,7 @@
 
             <div class="life-bar">
                 <p>Intentos restantes: {{triesLeft.length}}</p>
+                <p>Cartas restantes: {{_majorMinorService.cards.length}}</p>
                 <img *ngFor="let item of triesLeft" class="full-heart" src="../../../../assets/full-heart.png" alt="">
             </div>
             <div>
@@ -88,8 +89,8 @@
                     La siguiente carta es
                 </p>
                 <div class="action-buttons">
-                    <button class="custom-button lesser" (click)="getNextCard()">Menor</button>
-                    <button class="custom-button greater" (click)="getNextCard(true)">Mayor</button>
+                    <button class="custom-button lesser" (click)="getNextCard()">⬇️ Menor</button>
+                    <button class="custom-button greater" (click)="getNextCard(true)">Mayor ⬆️</button>
                 </div>
             </div>
         </ng-container>

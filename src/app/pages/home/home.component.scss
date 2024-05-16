@@ -18,15 +18,35 @@
         padding: 0px 20px;
         gap: 30px;
         flex-wrap: wrap;
-        
+
         .game-card {
             @include center-content();
             min-width: 290px;
             min-height: 175px;
             background-color: $primary-color-1;
             border-radius: 8px;
+            border: 3px solid $primary-color-1;
             cursor: pointer;
+            background-position: center;
+            background-size: cover;
+
+            span {
+                background-color: $primary-color-1;
+                margin-bottom: auto;
+                padding: 5px;
+                color: $primary-color-3;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }
         }
     }
-    
+
+    .ahorca-two {
+        background-image: url('../../../assets/ahorca-two.png');
+    }
+
+    .major-minor {
+        background-image: url('../../../assets/major-minor.png');
+    }
+
 }

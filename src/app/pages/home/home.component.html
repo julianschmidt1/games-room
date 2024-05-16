@@ -4,8 +4,10 @@
     <h1 class="title">Inicio</h1>
 
     <div class="games-section">
-        <div class="game-card" *ngFor="let game of gamesList" (click)="handleGameNavigation(game.path)">
-            {{game.name}}
+        <div class="game-card" *ngFor="let game of gamesList" [ngClass]="game.image" (click)="handleGameNavigation(game.path)">
+            <span>
+                {{game.name}}
+            </span>
         </div>
     </div>
 
