@@ -69,6 +69,10 @@ export class AhorcaTwoService {
     this._gameStateSubject.next(gameState);
   }
 
+  public endCurrentGame(): void {
+    this._gameStateSubject.next({ inGame: false, triesLeft: 6, victory: false });
+  }
+
   private getKeyState(letter: string): SelectedKeyModel | undefined {
     return this._selectedKeys.find(key => key.key === letter);
   }

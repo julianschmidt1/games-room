@@ -28,7 +28,7 @@ export class AhorcaTwoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.handleStartGame();
+    this._ahorcaTwoService.endCurrentGame();
   }
 
   public handleStartGame(): void {
