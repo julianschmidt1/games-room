@@ -3,6 +3,7 @@ import { TriviascoService } from '../../../services/triviasco.service';
 import { CountryModel } from './models/country.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { GameStateModel } from '../ahorca-two/models/game-state.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-triviasco',
@@ -12,6 +13,7 @@ import { GameStateModel } from '../ahorca-two/models/game-state.model';
 export class TriviascoComponent implements OnInit, OnDestroy {
 
   private _triviascoService = inject(TriviascoService);
+  private _toastService = inject(ToastService);
   public currentGameState: GameStateModel | undefined;
 
   public remainingCountries: CountryModel[] = [];
@@ -27,7 +29,10 @@ export class TriviascoComponent implements OnInit, OnDestroy {
       next: (countriesData: CountryModel[]) => {
         this.allCountries = [...countriesData];
       },
-      error: (error: HttpErrorResponse) => console.log(error)
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+        this._toastService.errorMessage('Ocurrio un error al cargar el juego.')
+      }
     })
 
     this._triviascoService.game$.subscribe(gameState => {

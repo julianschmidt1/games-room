@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TriviascoComponent } from './triviasco.component';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { ChatComponent } from '../../../components/chat/chat.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ChatComponent } from '../../../components/chat/chat.component';
     ]),
     SidebarComponent,
     ChatComponent,
+    ToastModule
   ]
 })
 export class TriviascoModule { }
