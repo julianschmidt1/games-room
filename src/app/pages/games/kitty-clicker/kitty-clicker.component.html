@@ -1,0 +1,51 @@
+<div class="page-content">
+    <p-toast></p-toast>
+    <h1 class="title">
+        KITTY CLICKA
+    </h1>
+    <sidebar />
+    <chat-list />
+    <div class="game-container" *ngIf="currentGameState">
+
+        <div class="menu">
+            <span (click)="handleClick()" class="cat-clicker">😺</span>
+            <span>
+                MPS: {{fixDecimalValue(currentGameState.cps)}}
+            </span>
+            <span>
+                Michis por click: {{fixDecimalValue(currentGameState.clickMultiplier)}}
+            </span>
+        </div>
+
+        <div class="output">
+            <div class="shop">
+                <span class="michi-counter">
+                    Michis recolectados: {{fixDecimalValue(currentGameState.collectedCats)}}
+                </span>
+                <h1>TIENDA</h1>
+                <div class="product-container">
+                    <div class="product" *ngFor="let product of shop" (click)="handleBuyUpgrade(product.name)"
+                        [pTooltip]="productTooltip">
+                        {{product.icon}}
+                        <div class="product-amount">{{getProductAmount(product.name)}}</div>
+                        <ng-template #productTooltip>
+                            <div>{{product.name}}</div>
+                            <div>Precio: {{product.price}} MICHIS</div>
+                            <div class="effect" *ngIf="product.price <= currentGameState.collectedCats">
+                                {{product.cps ? 'Pasivamente ganas +' + product.cps + ' MICHIS POR SEGUNDO' : ''}}
+                                {{product.clickMultiplier ? 'Al clickear ganas +' + product.clickMultiplier + '
+                                MICHISEXTRA' : ''}}
+                            </div>
+                            <div class="cant-afford" *ngIf="product.price > currentGameState.collectedCats">
+                                NO TE ALCANZA.
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

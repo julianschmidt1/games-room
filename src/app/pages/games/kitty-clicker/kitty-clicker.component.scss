@@ -1,0 +1,108 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+
+.page-content {
+
+    overflow-x: hidden;
+
+    .title {
+        color: $base-white;
+        margin-left: 50px;
+    }
+
+    .game-container {
+        @include display-flex();
+        flex-wrap: wrap;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding-bottom: 60px;
+
+        .michi-counter {
+            font-size: 40px;
+            color: $shiny-color;
+        }
+
+        .menu {
+            @include display-flex();
+            @include flex-direction(column);
+            @include justify-content(center);
+            height: 100%;
+            margin-left: 50px;
+            max-width: 350px;
+
+            span {
+                font-size: 24px;
+                color: $base-white;
+            }
+
+            .cat-clicker {
+                font-size: 150px;
+                cursor: pointer;
+                transition: 0.3s all;
+                height: 100%;
+                width: 230px;
+
+                &:hover {
+                    transform: scale(1.1);
+                    font-size: 160px;
+                }
+
+                &:active {
+                    font-size: 170px;
+                }
+            }
+
+        }
+
+        .output {
+            @include display-flex();
+            @include flex-direction(column);
+            @include justify-content(center);
+            @include align-items(center);
+            margin-left: 50px;
+        }
+
+        .shop {
+            @include display-flex();
+            @include flex-direction(column);
+            color: $base-white;
+
+            .product-container {
+                @include display-flex();
+                width: 100%;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .product {
+                position: relative;
+                font-size: 50px;
+                cursor: pointer;
+                border: 3px solid $primary-color-1;
+                width: min-content;
+                border-radius: 8px;
+
+                .product-amount {
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+                    background-color: $primary-color-3;
+                    font-size: 14px;
+                    padding: 5px;
+                    border-top-right-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                }
+            }
+
+        }
+    }
+}
+
+.effect {
+    color: $shiny-color;
+}
+
+.cant-afford {
+    color: $danger-color-1;
+}
