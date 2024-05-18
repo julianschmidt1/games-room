@@ -1,0 +1,23 @@
+<div class="page-content">
+    <sidebar />
+    <chat-list />
+    <h1 class="title">Triviasco</h1>
+
+    <div class="presentation">
+        <h1 (click)="handleStartGame()" *ngIf="!currentGameState?.inGame">COMENZAR PARTIDA</h1>
+    </div>
+
+    <div class="game-container">
+        <img *ngIf="selectedCountry" [src]="selectedCountry.flag" alt="">
+        <span class="score" (click)="selectCountry()">
+            Puntos: 1
+        </span>
+        <div class="options-container">
+            <div class="option" *ngFor="let country of ['Argentina','Estados unidos','Chile','Canada']"
+                (click)="selectOption(country)">
+                {{country}}
+            </div>
+        </div>
+    </div>
+
+</div>

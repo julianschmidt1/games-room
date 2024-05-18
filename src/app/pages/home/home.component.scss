@@ -29,6 +29,7 @@
             cursor: pointer;
             background-position: center;
             background-size: cover;
+            transition: 0.3s;
 
             span {
                 background-color: $primary-color-1;
@@ -37,6 +38,10 @@
                 color: $primary-color-3;
                 border-bottom-left-radius: 8px;
                 border-bottom-right-radius: 8px;
+            }
+
+            &:hover {
+                transform: scale(1.05);
             }
         }
     }

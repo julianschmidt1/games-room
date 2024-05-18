@@ -21,7 +21,7 @@ export class HomeComponent {
   public gamesList: Array<GameModel> = [
     { name: 'Ahorca2', path: 'ahorcatwo', image: 'ahorca-two' },
     { name: 'Mayor y Menor', path: 'majorminor', image: 'major-minor' },
-    { name: 'Diablo II', path: '', image: '' },
+    { name: 'Pregunta2', path: 'triviasco', image: 'triviasco' },
   ];
 
   public handleGameNavigation(path: string) {

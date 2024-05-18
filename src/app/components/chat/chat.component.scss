@@ -43,6 +43,7 @@
             min-width: 180px;
             max-width: 280px;
             color: $base-white;
+            word-wrap: break-word;
             
             .user-name {
                 @include display-flex();
