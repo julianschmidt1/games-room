@@ -33,6 +33,10 @@ export class TriviascoService {
     ))
   }
 
+  public endCurrentGame(): void {
+    this._gameStateSubject.next(initialGameData);
+  }
+
   private handleArgentinianEggs(name: string) {
     if (name === 'Islas Malvinas') {
       return 'Argentina';
@@ -81,7 +85,7 @@ export class TriviascoService {
 
 const initialGameData = {
   inGame: false,
-  triesLeft: 10,
+  triesLeft: 3,
   victory: false,
   totalScore: 0,
 }

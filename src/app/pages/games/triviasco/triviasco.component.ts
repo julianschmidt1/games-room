@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { TriviascoService } from '../../../services/triviasco.service';
 import { CountryModel } from './models/country.model';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { GameStateModel } from '../ahorca-two/models/game-state.model';
   templateUrl: './triviasco.component.html',
   styleUrl: './triviasco.component.scss'
 })
-export class TriviascoComponent implements OnInit {
+export class TriviascoComponent implements OnInit, OnDestroy {
 
   private _triviascoService = inject(TriviascoService);
   public currentGameState: GameStateModel | undefined;
@@ -38,9 +38,11 @@ export class TriviascoComponent implements OnInit {
         tries.push(i + 1);
       }
       this.triesLeft = tries;
-
     })
+  }
 
+  ngOnDestroy(): void {
+    this._triviascoService.endCurrentGame();
   }
 
   handleSelectOption(optionCountryName: string): void {
