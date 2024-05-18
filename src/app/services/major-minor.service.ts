@@ -47,17 +47,9 @@ export class MajorMinorService {
 
     if (isGreaterAndConditionFulfilled || isLesserAndConditionFulfilled) {
       this._gameStateSubject.next({ ...currentGameState, totalScore: currentGameState.totalScore + 1 });
-      console.log('CORRECTO');
-      console.log('Current: ', currentCard);
-      console.log('newCard: ', newCard);
 
     } else if (!isGreaterAndConditionFulfilled && !isLesserAndConditionFulfilled && !equalNumber) {
       this._gameStateSubject.next({ ...currentGameState, triesLeft: currentGameState.triesLeft - 1 });
-
-
-      console.log('INCORRECTO');
-      console.log('Current: ', currentCard);
-      console.log('newCard: ', newCard);
 
     } else {
       console.log('Es igual, no cumple nada :{');

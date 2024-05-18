@@ -4,18 +4,29 @@
     <h1 class="title">Triviasco</h1>
 
     <div class="presentation">
-        <h1 (click)="handleStartGame()" *ngIf="!currentGameState?.inGame">COMENZAR PARTIDA</h1>
+        <h1 *ngIf="currentGameState?.victory">GANASTE 😎</h1>
+        <h1 *ngIf="!currentGameState?.triesLeft">PERDISTE... 😒💀</h1>
+        <h1 class="score" *ngIf="currentGameState?.victory || !currentGameState?.triesLeft">PUNTAJE TOTAL:
+            {{currentGameState?.totalScore}}</h1>
+        <h1 (click)="handleStartGame()"
+            *ngIf="!currentGameState?.inGame || !currentGameState?.triesLeft || currentGameState?.victory">COMENZAR
+            PARTIDA</h1>
     </div>
 
-    <div class="game-container">
-        <img *ngIf="selectedCountry" [src]="selectedCountry.flag" alt="">
-        <span class="score" (click)="selectCountry()">
-            Puntos: 1
+    <div class="game-container"
+        *ngIf="currentGameState && currentGameState?.inGame && currentGameState.triesLeft && !currentGameState.victory">
+        <img class="country-flag" *ngIf="selectedCountry" [src]="selectedCountry.flag" alt="">
+        <span class="score">
+            Puntos: {{currentGameState.totalScore}}
         </span>
+        <div class="life-bar">
+            Vidas restantes:
+            <img *ngFor="let item of triesLeft" class="full-heart" src="../../../../assets/full-heart.png" alt="">
+            ({{triesLeft.length}})
+        </div>
         <div class="options-container">
-            <div class="option" *ngFor="let country of ['Argentina','Estados unidos','Chile','Canada']"
-                (click)="selectOption(country)">
-                {{country}}
+            <div class="option" *ngFor="let country of countryOptions" (click)="handleSelectOption(country.name)">
+                {{country.name}}
             </div>
         </div>
     </div>

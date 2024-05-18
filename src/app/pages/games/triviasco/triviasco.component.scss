@@ -10,7 +10,9 @@
 
     .presentation {
         @include display-flex();
+        @include flex-direction(column);
         @include justify-content(center);
+        @include align-items(center);
         color: $base-white;
 
         h1 {
@@ -18,23 +20,41 @@
         }
     }
 
+    .life-bar {
+        @include display-flex();
+        @include align-items(center);
+        color: $base-white;
+        gap: 4px;
+
+        p {
+            color: $base-white;
+        }
+
+        .full-heart {
+            height: 20px;
+            width: 20px;
+        }
+    }
+
+    .score {
+        color: $shiny-color;
+        margin: 20px 0;
+        font-size: 30px;
+    }
+
     .game-container {
         @include display-flex();
         @include flex-direction(column);
         @include align-items(center);
 
-        img {
+        .country-flag {
             border-radius: 14px;
             border: 3px solid $primary-color-1;
             height: 250px;
             width: 400px;
         }
 
-        .score {
-            color: $shiny-color;
-            margin-top: 20px;
-            font-size: 30px;
-        }
+
 
         .options-container {
             @include display-flex();
@@ -55,7 +75,7 @@
                 cursor: pointer;
                 transition: 0.2s all;
                 border: 2px solid $primary-color-1;
-                
+
                 &:hover {
                     border: 2px solid $shiny-color;
                     color: $shiny-color;

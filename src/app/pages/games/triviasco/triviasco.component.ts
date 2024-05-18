@@ -12,40 +12,65 @@ import { GameStateModel } from '../ahorca-two/models/game-state.model';
 export class TriviascoComponent implements OnInit {
 
   private _triviascoService = inject(TriviascoService);
-  public countries: CountryModel[] = [];
-  public selectedCountry!: CountryModel;
   public currentGameState: GameStateModel | undefined;
+
+  public remainingCountries: CountryModel[] = [];
+  public allCountries: CountryModel[] = [];
+
+  public selectedCountry!: CountryModel;
+  public countryOptions: CountryModel[] = [];
+  public triesLeft: Array<number> = [];
+
 
   ngOnInit(): void {
     this._triviascoService.getCountries().subscribe({
-      next: (data: CountryModel[]) => this.countries = data,
+      next: (countriesData: CountryModel[]) => {
+        this.allCountries = [...countriesData];
+      },
       error: (error: HttpErrorResponse) => console.log(error)
     })
 
     this._triviascoService.game$.subscribe(gameState => {
       console.log(gameState);
       this.currentGameState = gameState;
+      let tries = [];
+      for (let i = 0; i < gameState.triesLeft; i++) {
+        tries.push(i + 1);
+      }
+      this.triesLeft = tries;
+
     })
 
-    console.log(this);
   }
 
-  selectCountry() {
+  handleSelectOption(optionCountryName: string): void {
+    this._triviascoService.selectOption(this.selectedCountry, optionCountryName);
+    this.setCountryAndOptions();
 
-    const currentCountry = this._triviascoService.pickRandomCountry(this.countries);
-    console.log(currentCountry);
-    this.selectedCountry = currentCountry;
-  }
+    if (!this.currentGameState?.triesLeft) {
+      console.log('PERDISTE CHAU');
+      this._triviascoService.setFinalStatus(false);
+    }
 
-  selectOption(countryName: string) {
-    if (this.selectedCountry.name === countryName) {
-      console.log('Correcto', countryName);
-
+    if (!this.remainingCountries.length && this.currentGameState?.triesLeft) {
+      console.log('GANASTE');
+      this._triviascoService.setFinalStatus(true);
     }
   }
 
-  public handleStartGame() {
+  public handleStartGame(): void {
+    this._triviascoService.startNewGame();
+    this.remainingCountries = [...this.allCountries];
+    this.setCountryAndOptions();
+  }
 
+  private setCountryAndOptions(): void {
+    const currentCountry = this._triviascoService.pickRandomCountry(this.remainingCountries);
+
+    if (currentCountry) {
+      this.countryOptions = this._triviascoService.getRandomOptions(this.allCountries, currentCountry);
+      this.selectedCountry = currentCountry;
+    }
   }
 
 
