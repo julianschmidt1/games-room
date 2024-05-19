@@ -20,7 +20,7 @@ export class HomeComponent {
   private _router = inject(Router);
   public gamesList: Array<GameModel> = [
     { name: 'Ahorca2', path: 'ahorcatwo', image: 'ahorca-two' },
-    { name: 'Kitty Clicker', path: 'kittyclicker', image: 'kitty-clicker' },
+    { name: 'Kitty Clicker', path: 'kittyclicker', image: 'kitty-clicka' },
     { name: 'Mayor y Menor', path: 'majorminor', image: 'major-minor' },
     { name: 'Pregunta2', path: 'triviasco', image: 'triviasco' },
   ];

@@ -61,6 +61,10 @@ export class KittyClickerService {
     }
   }
 
+  endCurrentGame():void{
+    this._gameStateSubject.next(initialGameState);
+  }
+
   setCollectedCats(amount: number): void {
     const currentGameState = this._gameStateSubject.getValue();
     this._gameStateSubject.next({ ...currentGameState, collectedCats: currentGameState.collectedCats + amount });

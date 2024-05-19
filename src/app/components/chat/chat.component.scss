@@ -6,7 +6,7 @@
     position: fixed;
     right: 0;
     bottom: 0;
-    width: 350px;
+    width: 400px;
     z-index: 1000;
     
     .toggle-chat-bar {
@@ -41,8 +41,8 @@
             padding: 5px;
             margin: 4px;
             border-radius: 8px;
-            min-width: 180px;
-            max-width: 280px;
+            min-width: 240px;
+            max-width: 320px;
             color: $base-white;
             word-wrap: break-word;
             

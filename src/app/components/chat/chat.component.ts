@@ -50,11 +50,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     })
   }
-
+  
   ngAfterViewChecked(): void {
     this.scrollToBottom();
   }
-
+  
   get stringToColor() {
     return stringToColor;
   }
