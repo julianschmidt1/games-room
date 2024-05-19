@@ -44,6 +44,14 @@
                 animation: floatAnimation 2s ease infinite alternate;
             }
 
+            .shiny {
+                color: $shiny-color;
+            }
+
+            strong {
+                color: $shiny-color;
+            }
+
             .description {
                 text-align: justify;
                 letter-spacing: 1.2px;
